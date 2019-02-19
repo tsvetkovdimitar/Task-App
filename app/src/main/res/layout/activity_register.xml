@@ -2,12 +2,12 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
     android:orientation="vertical"
     android:gravity="center"
     android:background="@drawable/background"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context="com.d1m1tr.taskapp.MainActivity">
+    tools:context=".RegisterActivity">
 
     <ScrollView
         android:layout_width="match_parent"
@@ -21,7 +21,7 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Log In"
+                android:text="Registration"
                 android:textAppearance="?android:textAppearanceLarge"
                 android:gravity="center"/>
 
@@ -33,7 +33,7 @@
                 android:background="@drawable/editbackground"
                 android:padding="10dp"
                 android:textColorHint="@android:color/white"
-                android:id="@+id/email_login"
+                android:id="@+id/email_reg"
                 />
 
             <EditText
@@ -45,14 +45,14 @@
                 android:padding="10dp"
                 android:textColorHint="@android:color/white"
                 android:inputType="textPassword"
-                android:id="@+id/password_login"
+                android:id="@+id/password_reg"
                 />
 
             <Button
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="10dp"
-                android:text="Log In"
+                android:text="Register"
                 android:background="@drawable/editbackground"
                 android:padding="8dp"
                 android:id="@+id/login_btn"
@@ -63,7 +63,7 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Don't have an account? Sign Up here"
+                android:text="Already have an account? Log in here."
                 android:gravity="center"
                 android:padding="7dp"
                 android:textColor="@android:color/white"
@@ -73,5 +73,6 @@
         </LinearLayout>
 
     </ScrollView>
+
 
 </LinearLayout>
