@@ -4,8 +4,8 @@
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_margin="7dp"
-    app:cardElevation="10dp"
-    android:elevation="10dp">
+    app:cardElevation="6dp"
+    android:elevation="6dp">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -14,7 +14,7 @@
 
         <RelativeLayout
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:layout_weight="1">
 
             <TextView
@@ -22,7 +22,7 @@
                 android:layout_height="wrap_content"
                 android:text="9 September"
                 android:padding="10dp"
-                android:textAppearance="?android:textAppearanceMedium"
+                android:textAppearance="?android:textAppearanceSmall"
                 android:textColor="#FF9317E6"
                 android:id="@+id/date"/>
 
@@ -30,15 +30,14 @@
 
         <RelativeLayout
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="2">
+            android:layout_height="match_parent"
+            android:layout_weight="3">
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Title"
                 android:maxLines="2"
-                android:padding="5dp"
                 android:textAppearance="?android:textAppearanceMedium"
                 android:textColor="@android:color/black"
                 android:id="@+id/data_title"/>
@@ -50,6 +49,7 @@
                 android:text="Note"
                 android:maxLines="5"
                 android:padding="5dp"
+                android:layout_marginBottom="5dp"
                 android:textAppearance="?android:textAppearanceSmall"
                 android:textColor="@android:color/black"
                 android:id="@+id/data_note"/>
