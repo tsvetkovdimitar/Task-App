@@ -13,12 +13,12 @@ public class Data {
 
     }
 
-    public Data(String id, String title, String note, String date) {
+    public Data(String title, String note, String date, String id) {
 
-        this.id = id;
         this.title = title;
         this.note = note;
         this.date = date;
+        this.id = id;
 
     }
 

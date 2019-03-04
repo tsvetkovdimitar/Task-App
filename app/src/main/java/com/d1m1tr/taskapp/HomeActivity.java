@@ -10,12 +10,25 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
+
+import com.d1m1tr.taskapp.model.Data;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
+import java.text.DateFormat;
+import java.util.Date;
 
 public class HomeActivity extends AppCompatActivity {
 
     private Toolbar toolbar;
 
     private FloatingActionButton penBtn;
+
+    private DatabaseReference mDatabase;
+    private FirebaseAuth mAuth;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,6 +38,15 @@ public class HomeActivity extends AppCompatActivity {
         toolbar = findViewById(R.id.toolbar_home);
         setSupportActionBar(toolbar);
         getSupportActionBar().setTitle("Task App");
+
+        mAuth = FirebaseAuth.getInstance();
+
+        FirebaseUser mUser = mAuth.getCurrentUser();
+
+        String uId = mUser.getUid();
+
+        mDatabase = FirebaseDatabase.getInstance().getReference().child("TaskNote").child(uId);
+
 
         penBtn = findViewById(R.id.pen_btn);
 
@@ -40,7 +62,7 @@ public class HomeActivity extends AppCompatActivity {
 
                 myDialog.setView(myView);
 
-                AlertDialog dialog = myDialog.create();
+                final AlertDialog dialog = myDialog.create();
 
                 final EditText title = myView.findViewById(R.id.title);
                 final EditText note = myView.findViewById(R.id.note);
@@ -66,6 +88,17 @@ public class HomeActivity extends AppCompatActivity {
                             return;
 
                         }
+
+                        String id = mDatabase.push().getKey();
+                        String date = DateFormat.getDateInstance().format(new Date());
+
+                        Data data = new Data(mTitle, mNote, date, id);
+
+                        mDatabase.child(id).setValue(data);
+
+                        Toast.makeText(getApplicationContext(), "Creating task..", Toast.LENGTH_SHORT).show();
+
+                        dialog.dismiss();
 
                     }
                 });
