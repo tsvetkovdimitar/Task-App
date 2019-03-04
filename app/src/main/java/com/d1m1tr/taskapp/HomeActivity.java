@@ -1,8 +1,6 @@
 package com.d1m1tr.taskapp;
 
-import android.content.Context;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
@@ -18,6 +16,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.d1m1tr.taskapp.model.Data;
+import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
@@ -37,7 +36,7 @@ public class HomeActivity extends AppCompatActivity {
     private FirebaseAuth mAuth;
 
     //RecyclerView
-    private RecyclerView recylerview;
+    private RecyclerView recyclerview;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,15 +55,17 @@ public class HomeActivity extends AppCompatActivity {
 
         mDatabase = FirebaseDatabase.getInstance().getReference().child("TaskNote").child(uId);
 
+        mDatabase.keepSynced(true);
+
         //RecyclerView
-        recylerview = findViewById(R.id.resycler);
+        recyclerview = findViewById(R.id.resycler);
 
         LinearLayoutManager layoutManager = new LinearLayoutManager(this);
         layoutManager.setReverseLayout(true);
         layoutManager.setStackFromEnd(true);
 
-        recylerview.setHasFixedSize(true);
-        recylerview.setLayoutManager(layoutManager);
+        recyclerview.setHasFixedSize(true);
+        recyclerview.setLayoutManager(layoutManager);
 
         penBtn = findViewById(R.id.pen_btn);
 
@@ -133,14 +134,37 @@ public class HomeActivity extends AppCompatActivity {
 
         super.onStart();
 
+        FirebaseRecyclerAdapter<Data, MyViewHolder> adapter = new FirebaseRecyclerAdapter<Data, MyViewHolder>
+
+                (
+
+                        Data.class,
+                        R.layout.item_data,
+                        MyViewHolder.class,
+                        mDatabase
+
+                ) {
+            @Override
+            protected void populateViewHolder(MyViewHolder viewHolder, Data model, int position) {
+
+                viewHolder.setTitle(model.getTitle());
+                viewHolder.setNote(model.getNote());
+                viewHolder.setDate(model.getDate());
+
+            }
+        };
+
+        recyclerview.setAdapter(adapter);
+
     }
 
-    public static class MyViewHolder extends RecyclerView{
+    public static class MyViewHolder extends RecyclerView.ViewHolder{
 
         View myView;
 
-        public MyViewHolder(@NonNull Context context) {
-            super(context);
+        public MyViewHolder(View itemView) {
+            super(itemView);
+            myView = itemView;
         }
 
         public void setTitle(String title){
@@ -164,5 +188,6 @@ public class HomeActivity extends AppCompatActivity {
 
         }
     }
+
 
 }
