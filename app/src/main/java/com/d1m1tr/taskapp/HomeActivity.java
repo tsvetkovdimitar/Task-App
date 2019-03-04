@@ -4,6 +4,8 @@ import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
@@ -27,8 +29,12 @@ public class HomeActivity extends AppCompatActivity {
 
     private FloatingActionButton penBtn;
 
+    //Firebase
     private DatabaseReference mDatabase;
     private FirebaseAuth mAuth;
+
+    //RecyclerView
+    private RecyclerView recylerview;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,6 +53,15 @@ public class HomeActivity extends AppCompatActivity {
 
         mDatabase = FirebaseDatabase.getInstance().getReference().child("TaskNote").child(uId);
 
+        //RecyclerView
+        recylerview = findViewById(R.id.resycler);
+
+        LinearLayoutManager layoutManager = new LinearLayoutManager(this);
+        layoutManager.setReverseLayout(true);
+        layoutManager.setStackFromEnd(true);
+
+        recylerview.setHasFixedSize(true);
+        recylerview.setLayoutManager(layoutManager);
 
         penBtn = findViewById(R.id.pen_btn);
 
