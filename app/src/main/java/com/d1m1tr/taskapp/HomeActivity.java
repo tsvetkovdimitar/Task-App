@@ -1,6 +1,8 @@
 package com.d1m1tr.taskapp;
 
+import android.content.Context;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
@@ -12,6 +14,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.d1m1tr.taskapp.model.Data;
@@ -123,6 +126,43 @@ public class HomeActivity extends AppCompatActivity {
             }
         });
 
+    }
+
+    @Override
+    protected void onStart(){
+
+        super.onStart();
+
+    }
+
+    public static class MyViewHolder extends RecyclerView{
+
+        View myView;
+
+        public MyViewHolder(@NonNull Context context) {
+            super(context);
+        }
+
+        public void setTitle(String title){
+
+            TextView mTitle = myView.findViewById(R.id.data_title);
+            mTitle.setText(title);
+
+        }
+
+        public void setNote(String note){
+
+            TextView mNote = myView.findViewById(R.id.data_note);
+            mNote.setText(note);
+
+        }
+
+        public void setDate(String date){
+
+            TextView mDate = myView.findViewById(R.id.date);
+            mDate.setText(date);
+
+        }
     }
 
 }
