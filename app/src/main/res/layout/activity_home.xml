@@ -21,7 +21,7 @@
             android:layout_margin="20dp"
             app:fabSize="normal"
             android:id="@+id/pen_btn"
-            android:src="drawable/pen"
+            android:src="@drawable/pen"
             android:backgroundTint="#E0369C"/>
 
     </android.support.design.widget.CoordinatorLayout>
