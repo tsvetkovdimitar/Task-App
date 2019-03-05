@@ -53,7 +53,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_margin="10dp"
-                        android:inputType="" android:textColor="@android:color/black"
+                        android:textColor="@android:color/black"
                         android:id="@+id/update_title"/>
 
                 </RelativeLayout>
@@ -88,12 +88,12 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_margin="10dp"
-                        android:inputType="" android:textColor="@android:color/black"
+                        android:textColor="@android:color/black"
                         android:id="@+id/update_note"/>
 
                 </RelativeLayout>
 
-            </LinearLayout>
+        </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"

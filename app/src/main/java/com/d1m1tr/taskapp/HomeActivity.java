@@ -41,6 +41,17 @@ public class HomeActivity extends AppCompatActivity {
     //RecyclerView
     private RecyclerView recyclerview;
 
+    //Update input fields
+
+    private EditText titleUpdate;
+    private EditText noteUpdate;
+    private Button btnDelete;
+    private Button btnUpdate;
+
+    private String title;
+    private String note;
+    private String key;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -148,7 +159,7 @@ public class HomeActivity extends AppCompatActivity {
 
                 ) {
             @Override
-            protected void populateViewHolder(MyViewHolder viewHolder, Data model, int position) {
+            protected void populateViewHolder(MyViewHolder viewHolder, final Data model, final int position) {
 
                 viewHolder.setTitle(model.getTitle());
                 viewHolder.setNote(model.getNote());
@@ -157,6 +168,10 @@ public class HomeActivity extends AppCompatActivity {
                 viewHolder.myView.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
+
+                        key = getRef(position).getKey();
+                        title = model.getTitle();
+                        note = model.getNote();
 
                         updateData();
 
@@ -209,7 +224,50 @@ public class HomeActivity extends AppCompatActivity {
         View myView = inflater.inflate(R.layout.update_data, null);
         myDialog.setView(myView);
 
-        AlertDialog dialog = myDialog.create();
+        final AlertDialog dialog = myDialog.create();
+
+        titleUpdate = myView.findViewById(R.id.update_title);
+        noteUpdate = myView.findViewById(R.id.update_note);
+
+        titleUpdate.setText(title);
+        titleUpdate.setSelection(title.length());
+
+        noteUpdate.setText(note);
+        noteUpdate.setSelection(note.length());
+
+
+        btnDelete = myView.findViewById(R.id.btn_delete);
+        btnUpdate = myView.findViewById(R.id.btn_update);
+
+        btnUpdate.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                title = titleUpdate.getText().toString().trim();
+                note = noteUpdate.getText().toString().trim();
+
+                String mDate = DateFormat.getDateInstance().format(new Date());
+
+                Data data = new Data(title, note, mDate, key);
+
+                mDatabase.child(key).setValue(data);
+
+                dialog.dismiss();
+
+            }
+        });
+
+        btnDelete.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                mDatabase.child(key).removeValue();
+
+                dialog.dismiss();
+
+            }
+        });
+
 
         dialog.show();
 
